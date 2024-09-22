@@ -41,3 +41,11 @@ while pil != pilihan_komputer:
         tries += 1
     elif pil == pilihan_komputer:
         print(f"Anda Benar !!!\n Selamat {nama} kamu berhasil memenangkan game ini!!!")
+
+"""
+1. Import modul sys dan random untuk keperluan progrma
+3-4. Membuat variabel nama dan umur dengan nilai dari masukkan pengguna
+6. Eksekusi kondisional, Jika umur yang dimasukkan pengguna dibawah 17 Tahun, program akan berhenti dan menampilkan "Anak kecil tidak boleh mainan game seperti ini." dengan teks berwarna merah
+9. Tampilkan Selamat datang
+
+"""
