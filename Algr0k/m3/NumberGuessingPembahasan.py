@@ -30,7 +30,7 @@ while pil != pilihan_komputer:
             print("Anda adalah pejuang, saya suka")
             tries -= 5
         else:
-            sys.exit("Anda cupu")
+            sys.exit("Harus lebih semangat lagi")
 
     pil = int(input(": "))
     if pil > pilihan_komputer:
@@ -46,6 +46,7 @@ while pil != pilihan_komputer:
 1. Import modul sys dan random untuk keperluan progrma
 3-4. Membuat variabel nama dan umur dengan nilai dari masukkan pengguna
 6. Eksekusi kondisional, Jika umur yang dimasukkan pengguna dibawah 17 Tahun, program akan berhenti dan menampilkan "Anak kecil tidak boleh mainan game seperti ini." dengan teks berwarna merah
-9. Tampilkan Selamat datang
+9. Tampilkan "SELAMAT DATANG" nama dengan data dari variabel nama "DI PERMAINAN TERBAIK ABAD INI Kamu akan menebak angka yang dipilih komputer Apakah kamu ingin bermain ?"
+
 
 """
