@@ -1,7 +1,3 @@
-"""
-Buatlah program luas dan keliling bidang persegi, persegi panjang, dan segitiga
-dengan pilihan menu. Selama menu keluar tidak dipilih, program terus berjalan.
-"""
 import math
 
 pilihan = 0
@@ -58,3 +54,8 @@ while pilihan != 4:
             lanjut = input("Tekan enter untuk lanjut\n\n")
     else:
         print("\033[31mNot in choice.\033[0m")
+
+"""
+Buatlah program luas dan keliling bidang persegi, persegi panjang, dan segitiga
+dengan pilihan menu. Selama menu keluar tidak dipilih, program terus berjalan.
+"""
