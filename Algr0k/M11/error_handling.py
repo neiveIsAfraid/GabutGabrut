@@ -1,4 +1,3 @@
-
 contacts = {
     "Anto": "+628 6534 3425",
     "Budi": "+628 5578 0979",
@@ -9,8 +8,8 @@ contacts = {
     "John": "+628 5578 1453",
     "James":"+628 5578 0789"
 }
-pilihan = 0
-while pilihan != 5:
+while True:
+  pilihan = 0
   try:
     pilihan = int(input(f"\n{"=" * 12} MENU {"=" * 12}\n\n1. Tampilkan seluruh kontak\n2. Cari kontak dengan nama\n3. Tambah kontak\n4. Hapus kontak\n5. Keluar\n:"))
   except ValueError:
@@ -83,4 +82,6 @@ while pilihan != 5:
     print("\033[41mTidak termasuk dalam pilihan...\033[0m")
     input("Tekan enter untuk melanjutkan...")
   
-  pilihan = 0
+  elif pilihan == 5:
+    print("GoodBye!!!")
+    break
