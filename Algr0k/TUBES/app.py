@@ -294,7 +294,7 @@ def setup_ui():
     return window
 
 def tambah_transaksi():
-    tanggal = input_tanggal.dateTime().toString("dd-MM-yyyy")
+    tanggal = input_tanggal.date().toString("dd-MM-yyyy")
     deskripsi = input_deskripsi.text()
     kategori = input_kategori.text().upper()
     jumlah = input_nominal.text()
@@ -435,7 +435,9 @@ def muat_anggaran():
     try:
         with open(f"anggaran{berkas_pengguna}.csv","r") as file:
             reader = csv.reader(file)
-            anggaran = [row for row in reader]
+            anggaran = []
+            for row in reader:
+                anggaran.append(row)
         perbarui_tabel_anggaran(anggaran)
     except:
         anggaran = []
@@ -444,8 +446,8 @@ def tambah_anggaran():
     kategori = input_kategori_anggaran.text().upper()
     jumlah = input_nominal_anggaran.text()
     periode = combo_periode_anggaran.currentText()
-    mulai = input_mulai_anggaran.dateTime().toString("dd-MM-yyyy")
-    akhir = input_akhir_anggaran.dateTime().toString("dd-MM-yyyy")
+    mulai = input_mulai_anggaran.date().toString("dd-MM-yyyy")
+    akhir = input_akhir_anggaran.date().toString("dd-MM-yyyy")
 
     tanggal_mulai = input_mulai_anggaran.date()
     tanggal_akhir = input_akhir_anggaran.date()
@@ -456,10 +458,10 @@ def tambah_anggaran():
     if periode == "Harian" and mulai != akhir:
         QMessageBox.warning(laman_anggaran, "Error", "Untuk anggaran harian, tanggal akhir harus sama dengan tanggal mulai.")
         return
-    elif periode == "Mingguan" and (tanggal_akhir > tanggal_mulai.addDays(7)):
+    elif periode == "Mingguan" and tanggal_akhir > tanggal_mulai.addDays(7):
         QMessageBox.warning(laman_anggaran, "Error", "Untuk anggaran mingguan, tanggal akhir tidak boleh lebih dari 7 hari dari tanggal mulai.")
         return
-    elif periode == "Bulanan" and (tanggal_mulai > tanggal_akhir.addDays(30)):
+    elif periode == "Bulanan" and tanggal_mulai > tanggal_akhir.addDays(30):
         QMessageBox.warning(laman_anggaran, "Error", "Untuk anggaran bulanan, tanggal akhir tidak boleh lebih dari 30 hari dari tanggal mulai.")
         return
 
@@ -500,6 +502,9 @@ def edit_anggaran():
         return
     try:
         jumlah = float(jumlah)
+        if jumlah <= 0:
+            QMessageBox.warning(laman_transaksi, "Peringatan", "Nominal kurang dari 0")
+            return
     except:
         QMessageBox.warning(laman_anggaran, "Edit Gagal", "Silahkan isi nominal dengan angka")
         return
@@ -571,4 +576,3 @@ if menu_login_tampilan():
     window = setup_ui()
     window.show()
     app.exec()
-    
