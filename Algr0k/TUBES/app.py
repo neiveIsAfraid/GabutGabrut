@@ -10,23 +10,22 @@ def menu_login_tampilan():
     dialog.setStyleSheet("background-color: white;")
     layout = QVBoxLayout(dialog)
 
-    input_username = QLineEdit(dialog)
+    input_username = QLineEdit()
     input_username.setPlaceholderText("Masukkan Username")
     layout.addWidget(input_username)
 
-    input_password = QLineEdit(dialog)
+    input_password = QLineEdit()
     input_password.setPlaceholderText("Masukkan Password")
     input_password.setEchoMode(QLineEdit.Password)
     layout.addWidget(input_password)
 
-    tombol_login = QPushButton("Login", dialog)
+    tombol_login = QPushButton("Login")
     tombol_login.setStyleSheet("background-color: #4CAF50; color: white;")
     layout.addWidget(tombol_login)
 
-    tombol_register = QPushButton("Register", dialog)
+    tombol_register = QPushButton("Register")
     tombol_register.setStyleSheet("background-color: #2196F3; color: white;")
     layout.addWidget(tombol_register)
-    
     def login():
         global berkas_pengguna
         username = input_username.text()
@@ -34,7 +33,7 @@ def menu_login_tampilan():
         if validasi_login(username, password):
             dialog.accept()
             berkas_pengguna = username
-        else:
+        else:   
            QMessageBox.warning(dialog, "Login Gagal", "Username atau Password salah.")
         
     def validasi_login(username, password):
@@ -70,7 +69,7 @@ def menu_login_tampilan():
         return True
     
 def setup_ui():
-    global transaksi, total_pengeluaran_harian_teks, total_pengeluaran_mingguan_teks, total_pengeluaran_bulanan_teks, tabel_laporan, combo_periode_anggaran, input_mulai_anggaran, input_akhir_anggaran, input_nominal_anggaran, input_kategori_anggaran, tabel_anggaran, total_pengeluaran_teks, combo_periode, filter_tanggal_input, tabel, filter_combo, laman_transaksi, tab_widget, laman_transaksi, input_deskripsi, input_kategori, input_nominal, input_tanggal
+    global laman_anggaran, transaksi, total_pengeluaran_harian_teks, total_pengeluaran_mingguan_teks, total_pengeluaran_bulanan_teks, tabel_laporan, combo_periode_anggaran, input_mulai_anggaran, input_akhir_anggaran, input_nominal_anggaran, input_kategori_anggaran, tabel_anggaran, total_pengeluaran_teks, combo_periode, filter_tanggal_input, tabel, filter_combo, laman_transaksi, tab_widget, laman_transaksi, input_deskripsi, input_kategori, input_nominal, input_tanggal
 
     window = QWidget()
     window.setWindowTitle("CashTrack")
@@ -78,67 +77,68 @@ def setup_ui():
     tab_widget = QTabWidget(window)
     
     laman_transaksi = QWidget()
-    layout_utama_transaksi = QVBoxLayout(laman_transaksi)
+    layout_utama_transaksi = QVBoxLayout()
     layout_tombol = QHBoxLayout()
     layout_filter = QHBoxLayout()
     layout_input = QHBoxLayout()
 
-    input_tanggal = QDateEdit(laman_transaksi)
+    input_tanggal = QDateEdit()
     input_tanggal.setDisplayFormat("dd-MM-yyyy")
     input_tanggal.setDate(QDate.currentDate())
     input_tanggal.setCalendarPopup(True)
     layout_input.addWidget(input_tanggal)
 
-    input_deskripsi = QLineEdit(laman_transaksi)
+    input_deskripsi = QLineEdit()
     input_deskripsi.setPlaceholderText("Deskripsi")
     layout_input.addWidget(input_deskripsi)
 
-    input_kategori = QLineEdit(laman_transaksi)
+    input_kategori = QLineEdit()
     input_kategori.setPlaceholderText("Kategori")
     layout_input.addWidget(input_kategori)
 
-    input_nominal = QLineEdit(laman_transaksi)
+    input_nominal = QLineEdit()
     input_nominal.setPlaceholderText("Nominal")
     layout_input.addWidget(input_nominal)
 
     layout_utama_transaksi.addLayout(layout_input)
 
-    tombol_tambah = QPushButton("Tambah Transaksi", laman_transaksi)
+    tombol_tambah = QPushButton("Tambah Transaksi")
     tombol_tambah.setStyleSheet("background-color: #4CAF50; color: white;")
     tombol_tambah.clicked.connect(tambah_transaksi)
     layout_tombol.addWidget(tombol_tambah)
 
-    tombol_edit = QPushButton("Edit Transaksi", laman_transaksi)
+    tombol_edit = QPushButton("Edit Transaksi")
     tombol_edit.setStyleSheet("background-color: #4CAF50; color: white;")
     tombol_edit.clicked.connect(edit_transaksi)
     layout_tombol.addWidget(tombol_edit)
     
-    tombol_delete = QPushButton('Hapus Transaksi', laman_transaksi)
+    tombol_delete = QPushButton('Hapus Transaksi')
     tombol_delete.setStyleSheet("background-color: #F44336; color: white;")
     tombol_delete.clicked.connect(hapus_transaksi)
     layout_tombol.addWidget(tombol_delete)
     layout_utama_transaksi.addLayout(layout_tombol)
 
-    filter_combo = QComboBox(laman_transaksi)
+    filter_combo = QComboBox()
     filter_combo.setFixedWidth(200)
 
     filter_combo.addItem("Tampilkan Semua")
     filter_combo.currentIndexChanged.connect(filter_transaksi)
     layout_filter.addWidget(filter_combo)
 
-    filter_tanggal_input = QLineEdit(laman_transaksi)
+    filter_tanggal_input = QLineEdit()
     filter_tanggal_input.setPlaceholderText('Filter Tanggal')
     filter_tanggal_input.textChanged.connect(filter_tanggal_transaksi)
     layout_filter.addWidget(filter_tanggal_input)
     layout_utama_transaksi.addLayout(layout_filter)
 
-    tabel = QTableWidget(laman_transaksi)
+    tabel = QTableWidget()
     tabel.setColumnCount(4)
     tabel.setHorizontalHeaderLabels(['Tanggal', 'Deskripsi', 'Kategori', 'Nominal'])
     tabel.setColumnWidth(0, 150)
     tabel.setColumnWidth(1, 540)
     tabel.setColumnWidth(2, 150)
     layout_utama_transaksi.addWidget(tabel)
+    laman_transaksi.setLayout(layout_utama_transaksi)
 
     laman_beranda = QWidget()
 
@@ -164,7 +164,7 @@ def setup_ui():
     tombol_pengeluaran_total.setStyleSheet("background-color: #2196F3; color: white; font-size: 20px;")
     tombol_pengeluaran_total.setGeometry(5,685,965,50)
 
-    scroll_tips =QScrollArea(laman_beranda)
+    scroll_tips = QScrollArea(laman_beranda)
     scroll_tips.setWidgetResizable(True)
     scroll_tips.setGeometry(0,240, 975,400)
     scroll_tips.setStyleSheet("background-color: white;")
@@ -175,55 +175,54 @@ def setup_ui():
     header_judul = QLabel("Artikel Artikel Keuangan Menarik")
     header_judul.setStyleSheet("font-size: 20px; font-weight:bold;")
 
-    label2 = QTextBrowser(scroll_content)
-    label2.setOpenExternalLinks(True)
-    label2.append("""
+    tautans = QTextBrowser(scroll_content)
+    tautans.setOpenExternalLinks(True)
+    tautans.append("""
                     <a href ='https://www.milestones.org/map/browse-articles/money-management-skills-for-young-adults' style="color:black;font-size:18px;">Money Management Skills for Young Adults</a> <br><br>
                     <a href ='https://www.manulife.co.id/id/artikel/tips-mengatur-keuangan-dengan-membuat-catatan-pengeluaran.html' style="color:black;font-size:18px;">Tips Mengatur Keuangan dengan Membuat Catatan Pengeluaran</a> <br><br>
                     <a href ='https://www.djkn.kemenkeu.go.id/kanwil-sumut/baca-artikel/14590/Pentingnya-Manajemen-Keuangan-dalam-Kehidupan-Sehari-Hari.html' style="color:black;font-size:18px;">Pentingnya Manajemen Keuangan dalam Kehidupan Sehari-Hari</a> <br><br>
                     <a href ='https://www.investopedia.com/articles/personal-finance/111813/five-rules-improve-your-financial-health.asp' style="color:black;font-size:18px;">5 Ways to Improve Your Financial Health</a> <br><br>
                     <a href='https://www.investopedia.com/how-to-create-a-budget-and-stop-wasting-money-8745869' style="color:black;font-size:18px;">Stop Wasting Money: How to Start a Budget and Stick To It</a> <br><br>
                     <a href='https://mediakeuangan.kemenkeu.go.id/article/show/7-tips-mengatur-keuangan-agar-tabunganmu-terus-bertambah' style="color:black;font-size:18px;">7 tips mengatur keuangan agar tabunganmu terus bertambah</a>
+                  
                   """)
 
     scroll_layout.addWidget(header_judul)
-    scroll_layout.addWidget(label2)
+    scroll_layout.addWidget(tautans)
     
 
     scroll_tips.setWidget(scroll_content)
 
     laman_anggaran = QWidget()
     layout_tanggal_anggaran = QHBoxLayout()
-    layout_anggaran = QVBoxLayout(laman_anggaran)
+    layout_anggaran = QVBoxLayout()
     
     layout_tombol_anggaran = QHBoxLayout()
     layout_text_anggaran = QHBoxLayout()
 
-    input_kategori_anggaran = QLineEdit(laman_anggaran)
+    input_kategori_anggaran = QLineEdit()
     input_kategori_anggaran.setPlaceholderText("Kategori Anggaran")
     layout_anggaran.addWidget(input_kategori_anggaran)
 
-    input_nominal_anggaran = QLineEdit(laman_anggaran)
+    input_nominal_anggaran = QLineEdit()
     input_nominal_anggaran.setPlaceholderText("Nominal Anggaran")
     layout_anggaran.addWidget(input_nominal_anggaran)
 
-    label_mulai = QLabel(laman_anggaran)
-    label_mulai.setText("Tanggal Mulai")
+    label_mulai = QLabel("Tanggal Mulai")
     label_mulai.setStyleSheet("font-weight: bold;")
     layout_text_anggaran.addWidget(label_mulai)
     
-    label_akhir = QLabel(laman_anggaran)
-    label_akhir.setText("Tanggal Akhir")
+    label_akhir = QLabel("Tanggal Akhir")
     label_akhir.setStyleSheet("font-weight: bold;")
     layout_text_anggaran.addWidget(label_akhir)
 
-    input_mulai_anggaran = QDateEdit(laman_anggaran)
+    input_mulai_anggaran = QDateEdit()
     input_mulai_anggaran.setDisplayFormat("dd-MM-yyyy")
     input_mulai_anggaran.setDate(QDate.currentDate())
     input_mulai_anggaran.setCalendarPopup(True)
     layout_tanggal_anggaran.addWidget(input_mulai_anggaran)
     
-    input_akhir_anggaran = QDateEdit(laman_anggaran)
+    input_akhir_anggaran = QDateEdit()
     input_akhir_anggaran.setDisplayFormat("dd-MM-yyyy")
     input_akhir_anggaran.setDate(QDate.currentDate())
     input_akhir_anggaran.setCalendarPopup(True)
@@ -231,21 +230,21 @@ def setup_ui():
     layout_anggaran.addLayout(layout_text_anggaran)
     layout_anggaran.addLayout(layout_tanggal_anggaran)
 
-    combo_periode_anggaran = QComboBox(laman_anggaran)
+    combo_periode_anggaran = QComboBox()
     combo_periode_anggaran.addItems(["Harian", "Mingguan", "Bulanan"])
     layout_anggaran.addWidget(combo_periode_anggaran)
     
-    tombol_tambah_anggaran = QPushButton('Tambah Anggaran', laman_anggaran)
+    tombol_tambah_anggaran = QPushButton('Tambah Anggaran')
     tombol_tambah_anggaran.setStyleSheet("background-color: #4CAF50; color: white;")
     tombol_tambah_anggaran.clicked.connect(tambah_anggaran)
     layout_tombol_anggaran.addWidget(tombol_tambah_anggaran)
 
-    tombol_edit_anggaran = QPushButton('Edit Anggaran', laman_anggaran)
+    tombol_edit_anggaran = QPushButton('Edit Anggaran')
     tombol_edit_anggaran.setStyleSheet("background-color: #4CAF50; color: white;")
     tombol_edit_anggaran.clicked.connect(edit_anggaran)
     layout_tombol_anggaran.addWidget(tombol_edit_anggaran)
 
-    tombol_delete_anggaran = QPushButton('Hapus Anggaran', laman_anggaran)
+    tombol_delete_anggaran = QPushButton('Hapus Anggaran',)
     tombol_delete_anggaran.setStyleSheet("background-color: #F44336; color: white;")
     tombol_delete_anggaran.clicked.connect(delete_anggaran)
     layout_tombol_anggaran.addWidget(tombol_delete_anggaran)
@@ -261,6 +260,7 @@ def setup_ui():
 
     layout_anggaran.addLayout(layout_tombol_anggaran)
     layout_anggaran.addWidget(tabel_anggaran)
+    laman_anggaran.setLayout(layout_anggaran)
     
     laman_laporan = QWidget()
     layout_laporan = QVBoxLayout(laman_laporan)
@@ -274,7 +274,7 @@ def setup_ui():
     tabel_laporan.setColumnWidth(3, 240)
     layout_laporan.addWidget(tabel_laporan)
 
-    tombol_tampilkan_laporan = QPushButton('Hasilkan Laporan', laman_laporan)
+    tombol_tampilkan_laporan = QPushButton('Hasilkan Laporan')
     tombol_tampilkan_laporan.setStyleSheet("background-color: #2196F3; color: white; height:40px; font-size: 20px;")
     tombol_tampilkan_laporan.clicked.connect(hasilkan_laporan)
     layout_laporan.addWidget(tombol_tampilkan_laporan)
@@ -301,7 +301,6 @@ def tambah_transaksi():
 
     if not tanggal or not deskripsi or not kategori or not jumlah or deskripsi == ' ' or kategori == ' ' or jumlah == ' ':
         QMessageBox.warning(laman_transaksi, "Peringatan", "Silakan isi semua kolom")
-        fungsi_reset()
         return
     
     try:
@@ -344,19 +343,19 @@ def update_tabel_transaksi(data):
 def edit_transaksi():
     baris_yang_dipilih = tabel.currentRow()
     if baris_yang_dipilih < 0:
-        QMessageBox.warning(None, "Edit gagal", "Silahkan pilih transaksi yang ingin di edit")
+        QMessageBox.warning(laman_transaksi, "Edit gagal", "Silahkan pilih transaksi yang ingin di edit")
         return
     tanggal = input_tanggal.date().toString("dd-MM-yyyy")
     deskripsi = input_deskripsi.text()
     kategori = input_kategori.text().upper()
     jumlah = input_nominal.text()
     if not tanggal or not deskripsi or not kategori or not jumlah:
-        QMessageBox.warning(None, "Edit Gagal", "Pastikan tanggal, deskripsi, kategori, dan nominal sudah terisi")
+        QMessageBox.warning(laman_transaksi, "Edit Gagal", "Pastikan tanggal, deskripsi, kategori, dan nominal sudah terisi")
         return
     try:
         jumlah = float(jumlah)
     except:
-        QMessageBox.warning(None, "Edit Gagal", "Nominal harus berupa angka")
+        QMessageBox.warning(laman_transaksi, "Edit Gagal", "Nominal harus berupa angka")
         return
     transaksi[baris_yang_dipilih] = [tanggal, deskripsi, kategori, jumlah]
     simpan_transaksi()
@@ -383,7 +382,9 @@ def filter_transaksi():
     if kategori_dipilih == "Tampilkan Semua":
         data_filter = transaksi
     elif kategori_dipilih:
-        data_filter = [row for row in transaksi if len(row) > 2 and row[2] == kategori_dipilih]
+        for row in transaksi:
+            if len(row) > 2 and row[2] == kategori_dipilih:
+                data_filter.append(row)
     update_tabel_transaksi(data_filter)
 
 def update_opsi_filter():
@@ -401,7 +402,10 @@ def update_opsi_filter():
 
 def filter_tanggal_transaksi():
     filter_tanggal = filter_tanggal_input.text()
-    data_filter = [row for row in transaksi if row[0].startswith(filter_tanggal)]
+    data_filter = []
+    for row in transaksi:
+        if row[0].startswith(filter_tanggal):
+            data_filter.append(row)
     update_tabel_transaksi(data_filter)
 
 def tampilkan_total_pengeluaran():
@@ -417,7 +421,7 @@ def tampilkan_total_pengeluaran():
 
             if tanggal == tanggal_sekarang:
                 total_pengeluaran_harian += jumlah
-            if tanggal >= tanggal_sekarang.addDays(-tanggal_sekarang.dayOfWeek() + 1):
+            if tanggal >= tanggal_sekarang.addDays(-tanggal_sekarang.dayOfWeek() + 1) and tanggal < tanggal_sekarang.addDays(7 - tanggal_sekarang.dayOfWeek() + 1):
                 total_pengeluaran_mingguan += jumlah
             if tanggal.month() == tanggal_sekarang.month() and tanggal.year() == tanggal_sekarang.year():
                 total_pengeluaran_bulanan += jumlah
@@ -446,28 +450,28 @@ def tambah_anggaran():
     tanggal_mulai = input_mulai_anggaran.date()
     tanggal_akhir = input_akhir_anggaran.date()
     if not kategori or not jumlah or not periode or not mulai or not akhir:
-        QMessageBox.warning(None, "Peringatan", "Silakan isi semua form")
+        QMessageBox.warning(laman_anggaran, "Peringatan", "Silakan isi semua form")
         return
     
     if periode == "Harian" and mulai != akhir:
-        QMessageBox.warning(None, "Error", "Untuk anggaran harian, tanggal akhir harus sama dengan tanggal mulai.")
+        QMessageBox.warning(laman_anggaran, "Error", "Untuk anggaran harian, tanggal akhir harus sama dengan tanggal mulai.")
         return
     elif periode == "Mingguan" and (tanggal_akhir > tanggal_mulai.addDays(7)):
-        QMessageBox.warning(None, "Error", "Untuk anggaran mingguan, tanggal akhir tidak boleh lebih dari 7 hari dari tanggal mulai.")
+        QMessageBox.warning(laman_anggaran, "Error", "Untuk anggaran mingguan, tanggal akhir tidak boleh lebih dari 7 hari dari tanggal mulai.")
         return
     elif periode == "Bulanan" and (tanggal_mulai > tanggal_akhir.addDays(30)):
-        QMessageBox.warning(None, "Error", "Untuk anggaran bulanan, tanggal akhir tidak boleh lebih dari 30 hari dari tanggal mulai.")
+        QMessageBox.warning(laman_anggaran, "Error", "Untuk anggaran bulanan, tanggal akhir tidak boleh lebih dari 30 hari dari tanggal mulai.")
         return
 
     for row in anggaran:
         if row[0] == kategori:
             if row[2] == periode:
-                QMessageBox.warning(None, "Peringatan", "Kategori sudah ada, silakan ubah kategori lainnya.")
+                QMessageBox.warning(laman_anggaran, "Peringatan", "Kategori sudah ada, silakan ubah kategori lainnya.")
                 return
     try:
         jumlah = float(jumlah)
     except:
-        QMessageBox.warning(None, "Peringatan", "Silakan masukkan angka pada form nominal")
+        QMessageBox.warning(laman_anggaran, "Peringatan", "Nominal tidak valid")
         return
 
     with open(f'anggaran{berkas_pengguna}.csv','a') as file:
@@ -482,7 +486,7 @@ def tambah_anggaran():
 def edit_anggaran():
     tabel_dipilih = tabel_anggaran.currentRow()
     if tabel_dipilih < 0:
-        QMessageBox.warning(None, "Edit Gagal", "Silahkan pilih anggaran yang ingin diedit")
+        QMessageBox.warning(laman_anggaran, "Edit Gagal", "Silahkan pilih anggaran yang ingin diedit")
         return
     kategori = input_kategori_anggaran.text().upper()
     jumlah = input_nominal_anggaran.text()
@@ -492,29 +496,28 @@ def edit_anggaran():
     akhir = input_akhir_anggaran.date().toString("dd-MM-yyyy")
     
     if not kategori or not jumlah or periode_indeks < 0 or not mulai or not akhir:
-        QMessageBox.warning(None, "Edit Gagal", "Silahkan isi semua data")
+        QMessageBox.warning(laman_anggaran, "Edit Gagal", "Silahkan isi semua data")
         return
     try:
         jumlah = float(jumlah)
     except:
-        QMessageBox.warning(None, "Edit Gagal", "Silahkan isi nominal dengan angka")
+        QMessageBox.warning(laman_anggaran, "Edit Gagal", "Silahkan isi nominal dengan angka")
         return
     
     for row in anggaran:
         if row[0] == kategori and tabel_dipilih != anggaran.index(row):
             if row[2] == periode_teks:
-                QMessageBox.warning(None, "Peringatan", "Kategori sudah ada, silakan ubah kategori lainnya.")
+                QMessageBox.warning(laman_anggaran, "Peringatan", "Kategori sudah ada, silakan ubah kategori lainnya.")
                 return
 
     anggaran[tabel_dipilih] = [kategori, jumlah, periode_teks, mulai, akhir]
     simpan_anggaran()
-    fungsi_reset()
     muat_anggaran()
 
 def delete_anggaran():
     tabel_dipilih = tabel_anggaran.currentRow()
     if tabel_dipilih < 0:
-        QMessageBox.warning(None, "Hapus Gagal", "Silahkan pilih anggaran yang ingin dihapus")
+        QMessageBox.warning(laman_anggaran, "Hapus Gagal", "Silahkan pilih anggaran yang ingin dihapus")
         return
     del anggaran[tabel_dipilih]
     simpan_anggaran()
@@ -540,8 +543,16 @@ def hasilkan_laporan():
         jumlah_anggaran = float(item[1])
         tanggal_mulai = QDate.fromString(item[3], "dd-MM-yyyy")
         tanggal_akhir = QDate.fromString(item[4], "dd-MM-yyyy")
-        pengeluaran_aktual = sum(float(row[3]) for row in transaksi if row[2] == kategori and tanggal_mulai <= QDate.fromString(row[0], "dd-MM-yyyy") <= tanggal_akhir)
-        laporan.append([kategori, jumlah_anggaran, pengeluaran_aktual, "Dalam anggaran" if pengeluaran_aktual <= jumlah_anggaran else "Melebihi anggaran"])
+        pengeluaran_aktual = 0
+        for row in transaksi:
+            if row[2] == kategori and tanggal_mulai <= QDate.fromString(row[0], "dd-MM-yyyy") <= tanggal_akhir:
+                pengeluaran_aktual += float(row[3])
+        
+        if pengeluaran_aktual <= jumlah_anggaran:
+            status = "Dalam anggaran"
+        else:
+            status = "Melebihi anggaran"
+        laporan.append([kategori, jumlah_anggaran, pengeluaran_aktual, status])
 
     tabel_laporan.setRowCount(0)
     for row in laporan:
@@ -560,3 +571,4 @@ if menu_login_tampilan():
     window = setup_ui()
     window.show()
     app.exec()
+    
